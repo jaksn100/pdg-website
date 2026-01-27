@@ -1,0 +1,262 @@
+/* ==========================================================================
+   Contact Page Styles
+   ========================================================================== */
+
+/* Page Hero */
+.pageHero {
+    position: relative;
+    padding: 160px 0 80px;
+    background: linear-gradient(135deg, var(--color-dark-blue) 0%, var(--color-dark-blue-light) 100%);
+    overflow: hidden;
+}
+
+.pageHeroPattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.pageHeroContent {
+    position: relative;
+    z-index: 1;
+}
+
+.pageBreadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: var(--space-4);
+}
+
+.pageBreadcrumb a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.pageBreadcrumb a:hover {
+    color: var(--color-lime);
+}
+
+.pageBreadcrumb span {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.pageTitle {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-neutral-100);
+    margin-bottom: var(--space-4);
+    max-width: 700px;
+}
+
+.pageSubtitle {
+    font-size: var(--text-xl);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+    max-width: 600px;
+}
+
+/* Contact Section */
+.contactSection {
+    padding: var(--space-16) 0;
+}
+
+.contactGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+}
+
+@media (min-width: 1024px) {
+    .contactGrid {
+        grid-template-columns: 1.5fr 1fr;
+        gap: var(--space-16);
+    }
+}
+
+/* Form Container */
+.formContainer {
+    padding: var(--space-8);
+    background-color: var(--color-neutral-100);
+    border: 1px solid var(--color-neutral-300);
+    border-radius: var(--radius-xl);
+}
+
+.formTitle {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-6);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+}
+
+.formRow {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+}
+
+@media (min-width: 640px) {
+    .formRow {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.formGroup label {
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-neutral-900);
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    font-family: var(--font-family);
+    font-size: var(--text-base);
+    color: var(--color-neutral-900);
+    background-color: var(--color-neutral-100);
+    border: 1px solid var(--color-neutral-300);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(1, 117, 181, 0.1);
+}
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+    color: var(--color-neutral-400);
+}
+
+.formGroup textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form .btn {
+    align-self: flex-start;
+    margin-top: var(--space-2);
+}
+
+/* Info Container */
+.infoContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+.infoCard {
+    padding: var(--space-6);
+    background-color: var(--color-neutral-200);
+    border-radius: var(--radius-xl);
+}
+
+.infoTitle {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-4);
+}
+
+.infoItem {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+}
+
+.infoItem:last-child {
+    margin-bottom: 0;
+}
+
+.infoIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    background-color: var(--color-primary);
+    border-radius: var(--radius-lg);
+    color: var(--color-neutral-100);
+    font-size: 1rem;
+}
+
+.infoLabel {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--color-neutral-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-1);
+}
+
+.infoValue {
+    display: block;
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-neutral-900);
+    text-decoration: none;
+}
+
+a.infoValue:hover {
+    color: var(--color-primary);
+}
+
+.socialLinks {
+    display: flex;
+    gap: var(--space-4);
+}
+
+.socialLink {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-neutral-700);
+    background-color: var(--color-neutral-100);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+.socialLink:hover {
+    color: var(--color-primary);
+    background-color: var(--color-neutral-300);
+}
+
+.socialLink i {
+    font-size: 1rem;
+}
+
+.infoText {
+    font-size: var(--text-sm);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+    margin-bottom: var(--space-4);
+}

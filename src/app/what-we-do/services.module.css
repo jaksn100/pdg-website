@@ -1,0 +1,353 @@
+/* ==========================================================================
+   Services Page Styles
+   ========================================================================== */
+
+/* Page Hero */
+.pageHero {
+    position: relative;
+    padding: 160px 0 80px;
+    background: linear-gradient(135deg, var(--color-dark-blue) 0%, var(--color-dark-blue-light) 100%);
+    overflow: hidden;
+}
+
+.pageHeroPattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.pageHeroContent {
+    position: relative;
+    z-index: 1;
+}
+
+.pageBreadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: var(--space-4);
+}
+
+.pageBreadcrumb a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.pageBreadcrumb a:hover {
+    color: var(--color-lime);
+}
+
+.pageBreadcrumb span {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.pageTitle {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-neutral-100);
+    margin-bottom: var(--space-4);
+    max-width: 700px;
+}
+
+.pageSubtitle {
+    font-size: var(--text-xl);
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+    max-width: 600px;
+}
+
+/* Services Section */
+.servicesSection {
+    padding: var(--space-16) 0;
+}
+
+.sectionHeader {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto var(--space-12);
+}
+
+.sectionTitle {
+    font-size: var(--text-3xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-4);
+}
+
+.sectionSubtitle {
+    font-size: var(--text-lg);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+}
+
+.servicesGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+    .servicesGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Service Card */
+.serviceCard {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-8);
+    background-color: var(--color-neutral-100);
+    border: 1px solid var(--color-neutral-300);
+    border-radius: var(--radius-xl);
+    text-decoration: none;
+    transition: all var(--transition-base);
+}
+
+.serviceCard:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.serviceCard:hover .serviceLink {
+    color: var(--color-primary);
+}
+
+.serviceCard:hover .serviceLink i {
+    transform: translateX(4px);
+}
+
+.serviceHeader {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+}
+
+.serviceIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: var(--radius-lg);
+    color: var(--color-neutral-100);
+    font-size: 1.375rem;
+}
+
+.serviceTitle {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-neutral-900);
+    padding-top: var(--space-2);
+}
+
+.serviceDescription {
+    flex: 1;
+    font-size: var(--text-sm);
+    color: var(--color-neutral-600);
+    line-height: 1.7;
+    margin-bottom: var(--space-4);
+}
+
+.serviceFeatures {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-4);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2);
+}
+
+.serviceFeatures li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-neutral-700);
+}
+
+.serviceFeatures li i {
+    color: var(--color-primary);
+    font-size: 0.75rem;
+}
+
+.serviceLink {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-neutral-700);
+    margin-top: auto;
+    transition: color var(--transition-fast);
+}
+
+.serviceLink i {
+    font-size: 0.75rem;
+    transition: transform var(--transition-fast);
+}
+
+/* Service Detail Page Styles */
+.serviceIntro {
+    padding: var(--space-16) 0;
+}
+
+.introGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+    align-items: start;
+}
+
+@media (min-width: 1024px) {
+    .introGrid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.introContent p {
+    font-size: var(--text-base);
+    color: var(--color-neutral-600);
+    line-height: 1.8;
+    margin-bottom: var(--space-4);
+}
+
+.introContent p:last-child {
+    margin-bottom: 0;
+}
+
+.imagePlaceholder {
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--color-neutral-300), var(--color-neutral-200));
+    border-radius: var(--radius-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-neutral-500);
+    font-size: var(--text-sm);
+}
+
+/* Capabilities Section */
+.capabilitiesSection {
+    padding: var(--space-16) 0;
+    background-color: var(--color-neutral-200);
+}
+
+.capabilitiesGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+    .capabilitiesGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .capabilitiesGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.capabilityCard {
+    padding: var(--space-6);
+    background-color: var(--color-neutral-100);
+    border-radius: var(--radius-xl);
+    transition: all var(--transition-base);
+}
+
+.capabilityCard:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.capabilityIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background-color: rgba(1, 117, 181, 0.1);
+    border-radius: var(--radius-lg);
+    color: var(--color-primary);
+    font-size: 1.25rem;
+    margin-bottom: var(--space-4);
+}
+
+.capabilityTitle {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-2);
+}
+
+.capabilityDescription {
+    font-size: var(--text-sm);
+    color: var(--color-neutral-600);
+    line-height: 1.6;
+}
+
+/* Services Tag Grid */
+.servicesTagGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    justify-content: center;
+}
+
+.serviceTag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background-color: var(--color-neutral-200);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    color: var(--color-neutral-700);
+}
+
+.serviceTag i {
+    color: var(--color-primary);
+    font-size: 0.75rem;
+}
+
+/* CTA Banner */
+.ctaBanner {
+    padding: var(--space-16) 0;
+    background: linear-gradient(135deg, var(--color-dark-blue-light), var(--color-dark-blue));
+    text-align: center;
+}
+
+.ctaBannerTitle {
+    font-size: var(--text-3xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-neutral-100);
+    margin-bottom: var(--space-4);
+}
+
+.ctaBannerText {
+    font-size: var(--text-lg);
+    color: var(--color-neutral-400);
+    margin-bottom: var(--space-6);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ctaBannerActions {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+}
