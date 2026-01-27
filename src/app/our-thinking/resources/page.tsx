@@ -1,34 +1,20 @@
 import Link from 'next/link';
+import prisma from '@/lib/prisma';
 import styles from '../thinking.module.css';
 
-const resources = [
-    {
-        title: 'GRC Framework for Government Agencies',
-        excerpt: 'A comprehensive guide to building effective governance, risk, and compliance programs in the public sector.',
-        type: 'White Paper',
-        pages: '24 pages',
-    },
-    {
-        title: 'Building Accessible Digital Services',
-        excerpt: 'Ensuring compliance with Section 508 and WCAG 2.1 in government digital products.',
-        type: 'White Paper',
-        pages: '18 pages',
-    },
-    {
-        title: 'Cloud Security Best Practices',
-        excerpt: 'A practical guide to securing AWS and GCP workloads in enterprise environments.',
-        type: 'Guide',
-        pages: '32 pages',
-    },
-    {
-        title: 'IAM Implementation Checklist',
-        excerpt: 'Step-by-step checklist for planning and executing identity management projects.',
-        type: 'Checklist',
-        pages: '8 pages',
-    },
-];
+async function getWhitePapers() {
+    return prisma.article.findMany({
+        where: {
+            category: 'WHITE_PAPERS',
+            published: true,
+        },
+        orderBy: { publishedAt: 'desc' },
+    });
+}
 
-export default function ResourcesPage() {
+export default async function ResourcesPage() {
+    const resources = await getWhitePapers();
+
     return (
         <main>
             {/* Page Hero */}
@@ -52,23 +38,37 @@ export default function ResourcesPage() {
             {/* Content Section */}
             <section className={styles.contentSection}>
                 <div className="container">
-                    <div className={styles.articlesGrid}>
-                        {resources.map((resource) => (
-                            <div key={resource.title} className={styles.articleCard}>
-                                <div className={styles.articleImage}>
-                                    <span>{resource.type}</span>
-                                </div>
-                                <div className={styles.articleContent}>
-                                    <span className={styles.articleCategory}>{resource.type}</span>
-                                    <h3 className={styles.articleTitle}>{resource.title}</h3>
-                                    <p className={styles.articleExcerpt}>{resource.excerpt}</p>
-                                    <div className={styles.articleMeta}>
-                                        <span>{resource.pages}</span>
+                    {resources.length > 0 ? (
+                        <div className={styles.articlesGrid}>
+                            {resources.map((resource) => (
+                                <Link href={`/our-thinking/${resource.slug}`} key={resource.id} className={styles.articleCard}>
+                                    <div className={styles.articleImage}>
+                                        {resource.featureImage ? (
+                                            <img src={resource.featureImage} alt={resource.title} />
+                                        ) : (
+                                            <span>White Paper</span>
+                                        )}
                                     </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                                    <div className={styles.articleContent}>
+                                        <span className={styles.articleCategory}>White Paper</span>
+                                        <h3 className={styles.articleTitle}>{resource.title}</h3>
+                                        <p className={styles.articleExcerpt}>{resource.subhead}</p>
+                                        {resource.tags.length > 0 && (
+                                            <div className={styles.articleMeta}>
+                                                <span>{resource.tags[0]}</span>
+                                            </div>
+                                        )}
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className={styles.emptyState}>
+                            <i className="fa-sharp-duotone fa-solid fa-file-lines"></i>
+                            <h3>No resources yet</h3>
+                            <p>We're developing in-depth guides and white papers. Check back soon for valuable resources.</p>
+                        </div>
+                    )}
                 </div>
             </section>
 

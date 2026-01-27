@@ -294,3 +294,171 @@
     gap: var(--space-4);
     flex-wrap: wrap;
 }
+
+/* Empty State */
+.emptyState {
+    text-align: center;
+    padding: var(--space-16) var(--space-6);
+    background: var(--color-neutral-100);
+    border: 2px dashed var(--color-neutral-300);
+    border-radius: var(--radius-xl);
+}
+
+.emptyState i {
+    font-size: 3rem;
+    color: var(--color-neutral-400);
+    margin-bottom: var(--space-4);
+    display: block;
+}
+
+.emptyState h3 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-neutral-700);
+    margin-bottom: var(--space-2);
+}
+
+.emptyState p {
+    font-size: var(--text-base);
+    color: var(--color-neutral-500);
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Job Detail */
+.jobDetailMeta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+    margin-top: var(--space-2);
+}
+
+.jobDetailMeta span {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: var(--text-base);
+}
+
+.jobDetailMeta i {
+    color: var(--color-lime);
+}
+
+.jobDetailSection {
+    padding: var(--space-16) 0;
+    background-color: var(--color-neutral-100);
+}
+
+.jobDetailContent {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+}
+
+@media (min-width: 1024px) {
+    .jobDetailContent {
+        grid-template-columns: 1fr 350px;
+    }
+}
+
+.jobDetailMain {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+}
+
+.jobSection h2 {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-neutral-300);
+}
+
+.jobBody {
+    font-size: var(--text-lg);
+    line-height: 1.7;
+    color: var(--color-neutral-700);
+}
+
+.jobBody p {
+    margin-bottom: var(--space-4);
+}
+
+.jobBody ul {
+    margin-bottom: var(--space-4);
+    padding-left: var(--space-6);
+}
+
+.jobBody li {
+    margin-bottom: var(--space-2);
+}
+
+.jobDetailSidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+.jobApplyCard {
+    padding: var(--space-8);
+    background-color: var(--color-neutral-900);
+    border-radius: var(--radius-xl);
+    color: var(--color-neutral-100);
+    text-align: center;
+}
+
+.jobApplyCard h3 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-2);
+}
+
+.jobApplyCard p {
+    color: var(--color-neutral-400);
+    margin-bottom: var(--space-6);
+}
+
+.jobInfoCard {
+    padding: var(--space-8);
+    background-color: var(--color-neutral-200);
+    border-radius: var(--radius-xl);
+}
+
+.jobInfoCard h4 {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-6);
+}
+
+.jobInfoCard ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.jobInfoCard li {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.jobInfoCard strong {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-neutral-600);
+}
+
+.jobInfoCard span {
+    font-size: var(--text-base);
+    color: var(--color-neutral-900);
+    font-weight: var(--font-weight-medium);
+}

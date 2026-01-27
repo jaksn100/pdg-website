@@ -1,54 +1,21 @@
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import Link from 'next/link';
+import prisma from '@/lib/prisma';
 import styles from '../careers.module.css';
 
-const openPositions = [
-    {
-        title: 'Senior GRC Consultant',
-        department: 'GRC Practice',
-        location: 'Columbus, OH / Remote',
-        type: 'Full-time',
-        description: 'Lead governance, risk, and compliance initiatives for enterprise and government clients.',
-    },
-    {
-        title: 'AWS Cloud Architect',
-        department: 'Cloud Services',
-        location: 'Columbus, OH / Remote',
-        type: 'Full-time',
-        description: 'Design and implement cloud infrastructure solutions on AWS for government workloads.',
-    },
-    {
-        title: 'Atlassian Solutions Consultant',
-        department: 'Atlassian Practice',
-        location: 'Columbus, OH / Remote',
-        type: 'Full-time',
-        description: 'Implement and optimize Jira and Confluence solutions for enterprise clients.',
-    },
-    {
-        title: 'IAM Engineer',
-        department: 'Identity Services',
-        location: 'Columbus, OH / Remote',
-        type: 'Full-time',
-        description: 'Build and maintain identity and access management solutions for state agencies.',
-    },
-    {
-        title: 'Senior Systems Analyst',
-        department: 'Integration Services',
-        location: 'Columbus, OH / Remote',
-        type: 'Full-time',
-        description: 'Lead requirements gathering and system design for complex integration projects.',
-    },
-    {
-        title: 'DevOps Engineer',
-        department: 'Cloud Services',
-        location: 'Columbus, OH / Remote',
-        type: 'Full-time',
-        description: 'Build and maintain CI/CD pipelines and infrastructure automation.',
-    },
-];
+async function getOpenings() {
+    return prisma.jobOpening.findMany({
+        where: {
+            published: true,
+        },
+        orderBy: { publishedAt: 'desc' },
+    });
+}
 
-export default function OpeningsPage() {
+export default async function OpeningsPage() {
+    const openPositions = await getOpenings();
+
     return (
         <>
             <Header />
@@ -74,33 +41,43 @@ export default function OpeningsPage() {
                 {/* Positions List */}
                 <section className={styles.positionsSection}>
                     <div className="container">
-                        <div className={styles.positionsList}>
-                            {openPositions.map((position) => (
-                                <div key={position.title} className={styles.positionCard}>
-                                    <div className={styles.positionInfo}>
-                                        <h3 className={styles.positionTitle}>{position.title}</h3>
-                                        <p style={{ color: 'var(--color-neutral-600)', marginBottom: 'var(--space-3)' }}>{position.description}</p>
-                                        <div className={styles.positionMeta}>
-                                            <span>
-                                                <i className="fa-sharp-duotone fa-solid fa-building"></i>
-                                                {position.department}
-                                            </span>
-                                            <span>
-                                                <i className="fa-sharp-duotone fa-solid fa-location-dot"></i>
-                                                {position.location}
-                                            </span>
-                                            <span>
-                                                <i className="fa-sharp-duotone fa-solid fa-clock"></i>
-                                                {position.type}
-                                            </span>
+                        {openPositions.length > 0 ? (
+                            <div className={styles.positionsList}>
+                                {openPositions.map((position) => (
+                                    <Link href={`/careers/openings/${position.slug}`} key={position.id} className={styles.positionCard}>
+                                        <div className={styles.positionInfo}>
+                                            <h3 className={styles.positionTitle}>{position.title}</h3>
+                                            <p style={{ color: 'var(--color-neutral-600)', marginBottom: 'var(--space-3)' }}>
+                                                {position.description}
+                                            </p>
+                                            <div className={styles.positionMeta}>
+                                                <span>
+                                                    <i className="fa-sharp-duotone fa-solid fa-building"></i>
+                                                    {position.department}
+                                                </span>
+                                                <span>
+                                                    <i className="fa-sharp-duotone fa-solid fa-location-dot"></i>
+                                                    {position.location}
+                                                </span>
+                                                <span>
+                                                    <i className="fa-sharp-duotone fa-solid fa-clock"></i>
+                                                    {position.type}
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <Link href="/contact" className={styles.applyButton}>
-                                        Apply Now
+                                        <span className={styles.applyButton}>
+                                            View Details
+                                        </span>
                                     </Link>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className={styles.emptyState}>
+                                <i className="fa-sharp-duotone fa-solid fa-briefcase"></i>
+                                <h3>No current openings</h3>
+                                <p>We don't have any open positions at this time. Check back soon or submit your resume for future opportunities.</p>
+                            </div>
+                        )}
                     </div>
                 </section>
 

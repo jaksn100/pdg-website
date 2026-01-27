@@ -1,34 +1,20 @@
 import Link from 'next/link';
+import prisma from '@/lib/prisma';
 import styles from '../thinking.module.css';
 
-const caseStudies = [
-    {
-        title: 'Modernizing Ohio\'s State Government IT Infrastructure',
-        excerpt: 'How PDG helped transform legacy systems into a modern, scalable architecture serving millions of citizens.',
-        client: 'State of Ohio',
-        industry: 'Government',
-    },
-    {
-        title: 'Enterprise Atlassian Deployment for Healthcare',
-        excerpt: 'Implementing Jira and Confluence across a 5,000-person healthcare organization.',
-        client: 'Major Healthcare System',
-        industry: 'Healthcare',
-    },
-    {
-        title: 'Identity Management Transformation',
-        excerpt: 'Deploying a comprehensive IAM solution for a state agency serving 12 million residents.',
-        client: 'State Agency',
-        industry: 'Government',
-    },
-    {
-        title: 'Cloud Migration for Government Services',
-        excerpt: 'Moving critical citizen services to AWS while maintaining compliance and security.',
-        client: 'Government Agency',
-        industry: 'Government',
-    },
-];
+async function getCaseStudies() {
+    return prisma.article.findMany({
+        where: {
+            category: 'CASE_STUDIES',
+            published: true,
+        },
+        orderBy: { publishedAt: 'desc' },
+    });
+}
 
-export default function CaseStudiesPage() {
+export default async function CaseStudiesPage() {
+    const caseStudies = await getCaseStudies();
+
     return (
         <main>
             {/* Page Hero */}
@@ -52,23 +38,37 @@ export default function CaseStudiesPage() {
             {/* Content Section */}
             <section className={styles.contentSection}>
                 <div className="container">
-                    <div className={styles.articlesGrid}>
-                        {caseStudies.map((study) => (
-                            <div key={study.title} className={styles.articleCard}>
-                                <div className={styles.articleImage}>
-                                    <span>Case Study Image</span>
-                                </div>
-                                <div className={styles.articleContent}>
-                                    <span className={styles.articleCategory}>{study.industry}</span>
-                                    <h3 className={styles.articleTitle}>{study.title}</h3>
-                                    <p className={styles.articleExcerpt}>{study.excerpt}</p>
-                                    <div className={styles.articleMeta}>
-                                        <span>{study.client}</span>
+                    {caseStudies.length > 0 ? (
+                        <div className={styles.articlesGrid}>
+                            {caseStudies.map((study) => (
+                                <Link href={`/our-thinking/${study.slug}`} key={study.id} className={styles.articleCard}>
+                                    <div className={styles.articleImage}>
+                                        {study.featureImage ? (
+                                            <img src={study.featureImage} alt={study.title} />
+                                        ) : (
+                                            <span>Case Study Image</span>
+                                        )}
                                     </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                                    <div className={styles.articleContent}>
+                                        <span className={styles.articleCategory}>Case Study</span>
+                                        <h3 className={styles.articleTitle}>{study.title}</h3>
+                                        <p className={styles.articleExcerpt}>{study.subhead}</p>
+                                        {study.tags.length > 0 && (
+                                            <div className={styles.articleMeta}>
+                                                <span>{study.tags[0]}</span>
+                                            </div>
+                                        )}
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className={styles.emptyState}>
+                            <i className="fa-sharp-duotone fa-solid fa-folder-open"></i>
+                            <h3>No case studies yet</h3>
+                            <p>We're documenting our client success stories. Check back soon to see how PDG delivers results.</p>
+                        </div>
+                    )}
                 </div>
             </section>
 

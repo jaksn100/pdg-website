@@ -1,0 +1,23 @@
+/* Custom overrides for Quill editor to match dark admin theme */
+.rich-text-editor .ql-toolbar.ql-snow {
+    border-color: var(--color-neutral-300);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    background-color: var(--color-neutral-100);
+}
+
+.rich-text-editor .ql-container.ql-snow {
+    border-color: var(--color-neutral-300);
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    background-color: var(--color-neutral-100);
+    font-family: var(--font-family);
+    font-size: var(--text-base);
+}
+
+.rich-text-editor .ql-editor {
+    min-height: 200px;
+}
+
+.rich-text-editor .ql-editor.ql-blank::before {
+    font-style: normal;
+    color: var(--color-neutral-400);
+}

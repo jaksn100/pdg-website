@@ -1,60 +1,20 @@
 import Link from 'next/link';
+import prisma from '@/lib/prisma';
 import styles from './thinking.module.css';
+import ThinkingGrid from './ThinkingGrid';
 
-const insights = [
-    {
-        category: 'Case Study',
-        title: 'Modernizing Ohio\'s State Government IT Infrastructure',
-        excerpt: 'How PDG helped transform legacy systems into a modern, scalable architecture serving millions of citizens.',
-        date: 'January 2025',
-        readTime: '8 min read',
-        href: '/our-thinking/case-studies/ohio-it-modernization',
-    },
-    {
-        category: 'Insights',
-        title: 'The Future of Identity & Access Management in Government',
-        excerpt: 'Emerging trends and best practices for implementing robust IAM solutions in public sector environments.',
-        date: 'December 2024',
-        readTime: '6 min read',
-        href: '/our-thinking/insights/future-of-iam',
-    },
-    {
-        category: 'White Paper',
-        title: 'GRC Framework for Government Agencies',
-        excerpt: 'A comprehensive guide to building effective governance, risk, and compliance programs in the public sector.',
-        date: 'November 2024',
-        readTime: '12 min read',
-        href: '/our-thinking/resources/grc-framework-guide',
-    },
-    {
-        category: 'Case Study',
-        title: 'Enterprise Atlassian Deployment for Healthcare',
-        excerpt: 'Implementing Jira and Confluence across a 5,000-person healthcare organization.',
-        date: 'October 2024',
-        readTime: '7 min read',
-        href: '/our-thinking/case-studies/healthcare-atlassian',
-    },
-    {
-        category: 'Insights',
-        title: 'Cloud Migration Best Practices for Government',
-        excerpt: 'Key considerations and strategies for moving government workloads to AWS and GCP.',
-        date: 'September 2024',
-        readTime: '10 min read',
-        href: '/our-thinking/insights/cloud-migration-government',
-    },
-    {
-        category: 'White Paper',
-        title: 'Building Accessible Digital Services',
-        excerpt: 'Ensuring compliance with Section 508 and WCAG 2.1 in government digital products.',
-        date: 'August 2024',
-        readTime: '15 min read',
-        href: '/our-thinking/resources/accessibility-guide',
-    },
-];
+async function getAllArticles() {
+    return prisma.article.findMany({
+        where: {
+            published: true,
+        },
+        orderBy: { publishedAt: 'desc' },
+    });
+}
 
-const categories = ['All', 'Case Studies', 'Insights', 'White Papers'];
+export default async function OurThinkingPage() {
+    const articles = await getAllArticles();
 
-export default function OurThinkingPage() {
     return (
         <main>
             {/* Page Hero */}
@@ -76,40 +36,7 @@ export default function OurThinkingPage() {
 
             {/* Content Section */}
             <section className={styles.contentSection}>
-                <div className="container">
-                    {/* Category Filter */}
-                    <div className={styles.categoryFilter}>
-                        {categories.map((category, index) => (
-                            <button
-                                key={category}
-                                className={`${styles.categoryButton} ${index === 0 ? styles.active : ''}`}
-                            >
-                                {category}
-                            </button>
-                        ))}
-                    </div>
-
-                    {/* Articles Grid */}
-                    <div className={styles.articlesGrid}>
-                        {insights.map((article) => (
-                            <Link key={article.title} href={article.href} className={styles.articleCard}>
-                                <div className={styles.articleImage}>
-                                    <span>Article Image</span>
-                                </div>
-                                <div className={styles.articleContent}>
-                                    <span className={styles.articleCategory}>{article.category}</span>
-                                    <h3 className={styles.articleTitle}>{article.title}</h3>
-                                    <p className={styles.articleExcerpt}>{article.excerpt}</p>
-                                    <div className={styles.articleMeta}>
-                                        <span>{article.date}</span>
-                                        <span>•</span>
-                                        <span>{article.readTime}</span>
-                                    </div>
-                                </div>
-                            </Link>
-                        ))}
-                    </div>
-                </div>
+                <ThinkingGrid articles={articles} />
             </section>
 
             {/* CTA */}

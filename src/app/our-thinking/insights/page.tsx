@@ -1,34 +1,28 @@
 import Link from 'next/link';
+import prisma from '@/lib/prisma';
 import styles from '../thinking.module.css';
 
-const insights = [
-    {
-        title: 'The Future of Identity & Access Management in Government',
-        excerpt: 'Emerging trends and best practices for implementing robust IAM solutions in public sector environments.',
-        date: 'December 2024',
-        readTime: '6 min read',
-    },
-    {
-        title: 'Cloud Migration Best Practices for Government',
-        excerpt: 'Key considerations and strategies for moving government workloads to AWS and GCP.',
-        date: 'September 2024',
-        readTime: '10 min read',
-    },
-    {
-        title: 'Zero Trust Architecture: A Practical Guide',
-        excerpt: 'Implementing zero trust security models in enterprise and government environments.',
-        date: 'August 2024',
-        readTime: '8 min read',
-    },
-    {
-        title: 'Digital Transformation in the Public Sector',
-        excerpt: 'How government agencies are modernizing citizen services through technology.',
-        date: 'July 2024',
-        readTime: '7 min read',
-    },
-];
+async function getInsights() {
+    return prisma.article.findMany({
+        where: {
+            category: 'INSIGHTS',
+            published: true,
+        },
+        orderBy: { publishedAt: 'desc' },
+    });
+}
 
-export default function InsightsPage() {
+function formatDate(date: Date | null): string {
+    if (!date) return '';
+    return new Intl.DateTimeFormat('en-US', {
+        month: 'long',
+        year: 'numeric'
+    }).format(new Date(date));
+}
+
+export default async function InsightsPage() {
+    const insights = await getInsights();
+
     return (
         <main>
             {/* Page Hero */}
@@ -52,25 +46,35 @@ export default function InsightsPage() {
             {/* Content Section */}
             <section className={styles.contentSection}>
                 <div className="container">
-                    <div className={styles.articlesGrid}>
-                        {insights.map((article) => (
-                            <div key={article.title} className={styles.articleCard}>
-                                <div className={styles.articleImage}>
-                                    <span>Article Image</span>
-                                </div>
-                                <div className={styles.articleContent}>
-                                    <span className={styles.articleCategory}>Insight</span>
-                                    <h3 className={styles.articleTitle}>{article.title}</h3>
-                                    <p className={styles.articleExcerpt}>{article.excerpt}</p>
-                                    <div className={styles.articleMeta}>
-                                        <span>{article.date}</span>
-                                        <span>•</span>
-                                        <span>{article.readTime}</span>
+                    {insights.length > 0 ? (
+                        <div className={styles.articlesGrid}>
+                            {insights.map((article) => (
+                                <Link href={`/our-thinking/${article.slug}`} key={article.id} className={styles.articleCard}>
+                                    <div className={styles.articleImage}>
+                                        {article.featureImage ? (
+                                            <img src={article.featureImage} alt={article.title} />
+                                        ) : (
+                                            <span>Article Image</span>
+                                        )}
                                     </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                                    <div className={styles.articleContent}>
+                                        <span className={styles.articleCategory}>Insight</span>
+                                        <h3 className={styles.articleTitle}>{article.title}</h3>
+                                        <p className={styles.articleExcerpt}>{article.subhead}</p>
+                                        <div className={styles.articleMeta}>
+                                            <span>{formatDate(article.publishedAt)}</span>
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className={styles.emptyState}>
+                            <i className="fa-sharp-duotone fa-solid fa-lightbulb"></i>
+                            <h3>No insights yet</h3>
+                            <p>We're working on new thought leadership content. Check back soon for expert perspectives on technology trends.</p>
+                        </div>
+                    )}
                 </div>
             </section>
 
