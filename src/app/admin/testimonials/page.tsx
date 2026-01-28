@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import prisma from '@/lib/prisma';
 import styles from '../admin.module.css';
-import DeleteButton from '../articles/DeleteButton'; // Reuse or create generic
+import { DeleteTestimonialButton } from '../articles/DeleteButton';
 
 async function getTestimonials() {
     return prisma.testimonial.findMany({
@@ -13,72 +13,67 @@ export default async function AdminTestimonialsPage() {
     const testimonials = await getTestimonials();
 
     return (
-        <div className={styles.container}>
-            <div className={styles.header}>
-                <h1 className={styles.title}>Testimonials</h1>
-                <Link href="/admin/testimonials/new" className="btn btn-primary">
+        <>
+            <div className={styles.pageHeader}>
+                <div>
+                    <h1 className={styles.pageTitle}>Testimonials</h1>
+                    <p className={styles.pageSubtitle}>Manage client testimonials and success stories</p>
+                </div>
+                <Link href="/admin/testimonials/new" className={styles.submitButton}>
+                    <i className="fa-sharp-duotone fa-solid fa-plus"></i>
                     New Testimonial
                 </Link>
             </div>
 
-            <div className={styles.tableWrapper}>
-                <table className={styles.table}>
-                    <thead>
-                        <tr>
-                            <th>Author / Company</th>
-                            <th>Service Tag</th>
-                            <th>Featured</th>
-                            <th>Date</th>
-                            <th className="text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {testimonials.length === 0 ? (
+            <div className={styles.contentCard}>
+                {testimonials.length === 0 ? (
+                    <div className={styles.emptyState}>
+                        <i className="fa-sharp-duotone fa-solid fa-quote-left"></i>
+                        <h3>No testimonials yet</h3>
+                        <p>Create your first testimonial to get started</p>
+                    </div>
+                ) : (
+                    <table className={styles.contentTable}>
+                        <thead>
                             <tr>
-                                <td colSpan={5} className="text-center py-8 text-neutral-500">
-                                    No testimonials found.
-                                </td>
+                                <th>Author</th>
+                                <th>Company</th>
+                                <th>Service</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
                             </tr>
-                        ) : (
-                            testimonials.map((t) => (
+                        </thead>
+                        <tbody>
+                            {testimonials.map((t) => (
                                 <tr key={t.id}>
+                                    <td><strong>{t.author}</strong></td>
+                                    <td>{t.company}</td>
+                                    <td>{t.service}</td>
                                     <td>
-                                        <div className="font-medium">{t.author}</div>
-                                        <div className="text-sm text-neutral-500">{t.company}</div>
-                                    </td>
-                                    <td>
-                                        <span className={styles.badge}>{t.service}</span>
-                                    </td>
-                                    <td>
-                                        {t.featured ? (
-                                            <span className={styles.statusPublished}>Featured</span>
-                                        ) : (
-                                            <span className="text-neutral-400">-</span>
-                                        )}
+                                        <span className={`${styles.statusBadge} ${t.featured ? styles.published : styles.draft}`}>
+                                            {t.featured ? 'Featured' : 'Standard'}
+                                        </span>
                                     </td>
                                     <td>{new Date(t.createdAt).toLocaleDateString()}</td>
                                     <td>
-                                        <div className={styles.actions}>
+                                        <div className={styles.actionButtons}>
                                             <Link
                                                 href={`/admin/testimonials/${t.id}`}
-                                                className={styles.actionIcon}
+                                                className={styles.actionButton}
                                                 title="Edit"
                                             >
-                                                <i className="fa-regular fa-pen-to-square"></i>
+                                                <i className="fa-sharp-duotone fa-solid fa-pen"></i>
                                             </Link>
-                                            <DeleteButton
-                                                id={t.id}
-                                                endpoint="/api/admin/testimonials"
-                                                redirect="/admin/testimonials"
-                                            />
+                                            <DeleteTestimonialButton id={t.id} title={t.author} />
                                         </div>
                                     </td>
                                 </tr>
-                            ))
-                        )}
-                    </tbody>
-                </table>
+                            ))}
+                        </tbody>
+                    </table>
+                )}
             </div>
-        </div>
+        </>
     );
 }

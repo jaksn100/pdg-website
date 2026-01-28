@@ -1,5 +1,4 @@
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer';
+
 import Link from 'next/link';
 import styles from './clients.module.css';
 
@@ -54,7 +53,6 @@ export default async function ClientsPage() {
 
     return (
         <>
-            <Header />
             <main>
                 {/* Page Hero */}
                 <section className={styles.pageHero}>
@@ -136,7 +134,7 @@ export default async function ClientsPage() {
                         <div className={styles.sectionHeader}>
                             <h2 className={styles.sectionTitle}>What Our Partners Say</h2>
                             <Link href="/clients/testimonials" className={styles.sectionLink}>
-                                View All Stories <i className="fa-solid fa-arrow-right"></i>
+                                View All Stories <i className="fa-sharp-duotone fa-solid fa-arrow-right"></i>
                             </Link>
                         </div>
                         <div className={styles.testimonialsGrid}>
@@ -153,6 +151,7 @@ export default async function ClientsPage() {
                                         <div className={styles.testimonialAuthor}>
                                             <span className={styles.authorName}>{testimonial.author}</span>
                                             <span className={styles.authorOrg}>{testimonial.company}</span>
+                                            <span className={styles.testimonialTag}>{testimonial.service}</span>
                                         </div>
                                     </div>
                                 ))
@@ -183,7 +182,6 @@ export default async function ClientsPage() {
                     </div>
                 </section>
             </main>
-            <Footer />
         </>
     );
 }

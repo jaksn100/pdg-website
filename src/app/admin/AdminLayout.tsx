@@ -58,6 +58,10 @@ export default function AdminLayout({
                             <i className="fa-sharp-duotone fa-solid fa-briefcase"></i>
                             Job Openings
                         </Link>
+                        <Link href="/admin/testimonials" className={styles.adminNavLink}>
+                            <i className="fa-sharp-duotone fa-solid fa-quote-left"></i>
+                            Testimonials
+                        </Link>
                     </nav>
 
                     <div className={styles.adminUserMenu}>
