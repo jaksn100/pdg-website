@@ -70,3 +70,46 @@ export function DeleteJobButton({ id, title }: { id: string; title: string }) {
         </button>
     );
 }
+
+interface GenericDeleteButtonProps {
+    id: string;
+    endpoint: string;
+    redirect?: string;
+}
+
+export default function DeleteButton({ id, endpoint, redirect }: GenericDeleteButtonProps) {
+    const router = useRouter();
+
+    const handleDelete = async () => {
+        if (!confirm('Are you sure you want to delete this item? This action cannot be undone.')) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`${endpoint}/${id}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                router.refresh();
+                if (redirect) {
+                    // router.push(redirect);
+                }
+            } else {
+                alert('Failed to delete item');
+            }
+        } catch (error) {
+            alert('An error occurred');
+        }
+    };
+
+    return (
+        <button
+            onClick={handleDelete}
+            className={`${styles.actionButton} ${styles.delete}`}
+            title="Delete"
+        >
+            <i className="fa-sharp-duotone fa-solid fa-trash"></i>
+        </button>
+    );
+}

@@ -41,25 +41,17 @@ const metrics = [
     { value: '100%', label: 'Client Satisfaction' },
 ];
 
-const testimonials = [
-    {
-        quote: 'PDG has been an invaluable partner in our digital transformation journey. Their expertise and commitment to our success sets them apart.',
-        author: 'Government Agency Director',
-        organization: 'Ohio State Agency',
-    },
-    {
-        quote: 'The PDG team brings enterprise-level expertise with the agility and personal attention that makes all the difference on complex projects.',
-        author: 'Program Manager',
-        organization: 'Enterprise Partner',
-    },
-    {
-        quote: 'Working with PDG is like having an extension of our own team. They truly understand our challenges and deliver solutions that work.',
-        author: 'IT Director',
-        organization: 'Healthcare Organization',
-    },
-];
+import prisma from '@/lib/prisma';
 
-export default function ClientsPage() {
+// ... other constants ...
+
+export default async function ClientsPage() {
+    const featuredTestimonials = await prisma.testimonial.findMany({
+        where: { featured: true },
+        orderBy: { createdAt: 'desc' },
+        take: 3,
+    });
+
     return (
         <>
             <Header />
@@ -143,20 +135,32 @@ export default function ClientsPage() {
                     <div className="container">
                         <div className={styles.sectionHeader}>
                             <h2 className={styles.sectionTitle}>What Our Partners Say</h2>
+                            <Link href="/clients/testimonials" className={styles.sectionLink}>
+                                View All Stories <i className="fa-solid fa-arrow-right"></i>
+                            </Link>
                         </div>
                         <div className={styles.testimonialsGrid}>
-                            {testimonials.map((testimonial, index) => (
-                                <div key={index} className={styles.testimonialCard}>
-                                    <div className={styles.quoteIcon}>
-                                        <i className="fa-sharp-duotone fa-solid fa-quote-left"></i>
+                            {featuredTestimonials.length > 0 ? (
+                                featuredTestimonials.map((testimonial) => (
+                                    <div key={testimonial.id} className={styles.testimonialCard}>
+                                        <div className={styles.quoteIcon}>
+                                            <i className="fa-sharp-duotone fa-solid fa-quote-left"></i>
+                                        </div>
+                                        <div
+                                            className={styles.testimonialQuote}
+                                            dangerouslySetInnerHTML={{ __html: testimonial.quote }}
+                                        />
+                                        <div className={styles.testimonialAuthor}>
+                                            <span className={styles.authorName}>{testimonial.author}</span>
+                                            <span className={styles.authorOrg}>{testimonial.company}</span>
+                                        </div>
                                     </div>
-                                    <p className={styles.testimonialQuote}>{testimonial.quote}</p>
-                                    <div className={styles.testimonialAuthor}>
-                                        <span className={styles.authorName}>{testimonial.author}</span>
-                                        <span className={styles.authorOrg}>{testimonial.organization}</span>
-                                    </div>
-                                </div>
-                            ))}
+                                ))
+                            ) : (
+                                <p className="text-center text-neutral-500 col-span-full">
+                                    No featured testimonials yet.
+                                </p>
+                            )}
                         </div>
                     </div>
                 </section>

@@ -62,3 +62,15 @@ model JobOpening {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 }
+
+// Testimonial model
+model Testimonial {
+  id        String   @id @default(cuid())
+  author    String
+  company   String
+  quote     String   @db.Text
+  service   String
+  featured  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
