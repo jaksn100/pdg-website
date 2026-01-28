@@ -240,7 +240,7 @@
     font-size: 3rem;
     color: var(--color-neutral-400);
     margin-bottom: var(--space-4);
-    display: block;
+    display: inline-block;
 }
 
 .emptyState h3 {
