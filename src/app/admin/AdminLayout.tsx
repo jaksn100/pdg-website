@@ -54,13 +54,13 @@ export default function AdminLayout({
                             <i className="fa-sharp-duotone fa-solid fa-newspaper"></i>
                             Articles
                         </Link>
-                        <Link href="/admin/jobs" className={styles.adminNavLink}>
-                            <i className="fa-sharp-duotone fa-solid fa-briefcase"></i>
-                            Job Openings
-                        </Link>
                         <Link href="/admin/testimonials" className={styles.adminNavLink}>
                             <i className="fa-sharp-duotone fa-solid fa-quote-left"></i>
                             Testimonials
+                        </Link>
+                        <Link href="/admin/jobs" className={styles.adminNavLink}>
+                            <i className="fa-sharp-duotone fa-solid fa-briefcase"></i>
+                            Job Openings
                         </Link>
                     </nav>
 

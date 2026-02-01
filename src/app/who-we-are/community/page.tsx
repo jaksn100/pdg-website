@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from '../about/about.module.css';
 
 const communityInitiatives = [
@@ -68,8 +69,13 @@ export default function CommunityPage() {
                                 people we serve.
                             </p>
                         </div>
-                        <div className={styles.imagePlaceholder}>
-                            <span>Community Image</span>
+                        <div className={styles.imageContainer}>
+                            <Image
+                                src="/posts/community.jpg"
+                                alt="PDG Community"
+                                fill
+                                className={styles.sectionImage}
+                            />
                         </div>
                     </div>
                 </div>

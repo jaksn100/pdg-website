@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from '../about/about.module.css';
 
 const philosophyPrinciples = [
@@ -70,8 +71,13 @@ export default function PhilosophyPage() {
                                 continue to deliver results that exceed expectations.
                             </p>
                         </div>
-                        <div className={styles.imagePlaceholder}>
-                            <span>Philosophy Visual</span>
+                        <div className={styles.imageContainer}>
+                            <Image
+                                src="/posts/pdg-philosophy.jpg"
+                                alt="PDG Philosophy"
+                                fill
+                                className={styles.sectionImage}
+                            />
                         </div>
                     </div>
                 </div>

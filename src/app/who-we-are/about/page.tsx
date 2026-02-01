@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './about.module.css';
 
 const coreValues = [
@@ -50,7 +51,7 @@ export default function AboutPage() {
                     </div>
                     <h1 className={styles.pageTitle}>About PDG</h1>
                     <p className={styles.pageSubtitle}>
-                        Delivering IT consulting excellence with the expertise of a large consultancy
+                        Delivering professional consulting excellence with the expertise of a large consultancy
                         and the agility of a specialized partner.
                     </p>
                 </div>
@@ -63,10 +64,11 @@ export default function AboutPage() {
                         <div className={styles.contentBlock}>
                             <h2 className={styles.sectionTitle}>Who We Are</h2>
                             <p>
-                                Perspective Design Group (PDG) is an IT consulting firm established in 2009,
-                                bringing together deep technical expertise with strategic business insight.
-                                For over 16 years, we have partnered with government agencies and enterprise
-                                organizations to solve complex technology challenges.
+                                Perspective Design Group is a professional services firm that specializes
+                                in the intersection of business strategy, visual communication, and
+                                technical development. They position themselves as partners in long-term
+                                business growth, moving beyond standard creative services to provide
+                                "system-level" solutions.
                             </p>
                             <p>
                                 Our name reflects our core belief: that the right perspective transforms
@@ -80,8 +82,13 @@ export default function AboutPage() {
                                 responsiveness and personal attention that only a boutique firm can provide.
                             </p>
                         </div>
-                        <div className={styles.imagePlaceholder}>
-                            <span>PDG Team Image</span>
+                        <div className={styles.imageContainer}>
+                            <Image
+                                src="/posts/about-us.jpg"
+                                alt="PDG Team"
+                                fill
+                                className={styles.sectionImage}
+                            />
                         </div>
                     </div>
                 </div>

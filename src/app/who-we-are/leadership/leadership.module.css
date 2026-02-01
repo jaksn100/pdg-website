@@ -1,7 +1,8 @@
 /* ==========================================================================
-   About Page Styles
+   Leadership Page Styles
    ========================================================================== */
 
+/* Page Hero */
 .pageHero {
     position: relative;
     padding: 160px 0 80px;
@@ -60,17 +61,139 @@
     max-width: 600px;
 }
 
-/* Content Section */
-.contentSection {
+/* Founder Section */
+.founderSection {
     padding: var(--space-16) 0;
+    background-color: var(--color-neutral-100);
 }
 
-.contentSection:nth-child(even) {
+.founderGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+    align-items: start;
+}
+
+@media (min-width: 1024px) {
+    .founderGrid {
+        grid-template-columns: 300px 1fr;
+        gap: var(--space-16);
+    }
+}
+
+.founderImageContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.founderImageWrapper {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+@media (min-width: 1024px) {
+    .founderImageWrapper {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+.founderImage {
+    object-fit: cover;
+}
+
+.founderContent {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+.founderHeader {
+    margin-bottom: var(--space-2);
+}
+
+.founderName {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-neutral-900);
+    margin-bottom: var(--space-2);
+}
+
+.founderRole {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-primary);
+}
+
+.founderBio p {
+    font-size: var(--text-lg);
+    color: var(--color-neutral-700);
+    line-height: 1.8;
+    margin-bottom: var(--space-4);
+}
+
+.founderBio p:last-child {
+    margin-bottom: 0;
+}
+
+.founderDetails {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-neutral-300);
+}
+
+.detailItem {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-base);
+    color: var(--color-neutral-600);
+}
+
+.detailItem i {
+    color: var(--color-primary);
+    font-size: 1.25rem;
+}
+
+.linkedinLink {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-6);
+    background-color: #0A66C2;
+    color: var(--color-neutral-100);
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+    width: fit-content;
+}
+
+.linkedinLink:hover {
+    background-color: #004182;
+    color: var(--color-neutral-100);
+}
+
+.linkedinLink i {
+    font-size: 1.25rem;
+}
+
+/* Expertise Section */
+.expertiseSection {
+    padding: var(--space-16) 0;
     background-color: var(--color-neutral-200);
 }
 
 .sectionHeader {
-    margin-bottom: var(--space-10);
+    text-align: center;
+    margin-bottom: var(--space-12);
 }
 
 .sectionTitle {
@@ -84,123 +207,82 @@
     font-size: var(--text-lg);
     color: var(--color-neutral-600);
     line-height: 1.6;
-    max-width: 700px;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-/* Content Grid */
-.contentGrid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-12);
-    align-items: start;
-}
-
-@media (min-width: 1024px) {
-    .contentGrid {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-.contentBlock p {
-    font-size: var(--text-base);
-    color: var(--color-neutral-600);
-    line-height: 1.8;
-    margin-bottom: var(--space-4);
-}
-
-.contentBlock p:last-child {
-    margin-bottom: 0;
-}
-
-/* Image Placeholder */
-.imagePlaceholder {
-    aspect-ratio: 4/3;
-    background: linear-gradient(135deg, var(--color-neutral-300), var(--color-neutral-200));
-    border-radius: var(--radius-xl);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-neutral-500);
-    font-size: var(--text-sm);
-}
-
-/* Image Container */
-.imageContainer {
-    position: relative;
-    aspect-ratio: 4/3;
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-}
-
-.sectionImage {
-    object-fit: cover;
-}
-
-/* Value Grid */
-.valueGrid {
+.expertiseGrid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-6);
 }
 
 @media (min-width: 768px) {
-    .valueGrid {
+    .expertiseGrid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (min-width: 1024px) {
-    .valueGrid {
-        grid-template-columns: repeat(3, 1fr);
+    .expertiseGrid {
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
-.valueCard {
+.expertiseCard {
     padding: var(--space-6);
     background-color: var(--color-neutral-100);
     border: 1px solid var(--color-neutral-300);
     border-radius: var(--radius-xl);
+    text-align: center;
     transition: all var(--transition-base);
 }
 
-.valueCard:hover {
+.expertiseCard:hover {
     border-color: var(--color-primary);
-    transform: translateY(-2px);
+    transform: translateY(-4px);
     box-shadow: var(--shadow-md);
 }
 
-.valueIcon {
+.expertiseIcon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto var(--space-4);
     background-color: rgba(1, 117, 181, 0.1);
     border-radius: var(--radius-lg);
     color: var(--color-primary);
-    font-size: 1.25rem;
-    margin-bottom: var(--space-4);
+    font-size: 1.75rem;
 }
 
-.valueTitle {
+.expertiseTitle {
     font-size: var(--text-lg);
     font-weight: var(--font-weight-semibold);
     color: var(--color-neutral-900);
     margin-bottom: var(--space-2);
 }
 
-.valueDescription {
+.expertiseDescription {
     font-size: var(--text-sm);
     color: var(--color-neutral-600);
     line-height: 1.6;
 }
 
-/* Quote Block */
+/* Quote Section */
+.quoteSection {
+    padding: var(--space-16) 0;
+    background-color: var(--color-neutral-100);
+}
+
 .quoteBlock {
     padding: var(--space-8);
     background-color: var(--color-neutral-200);
     border-left: 10px solid var(--color-lime);
     border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .quoteText {

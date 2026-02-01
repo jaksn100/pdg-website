@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from '../about/about.module.css';
+import styles from './history.module.css';
 
 const timeline = [
     {
@@ -67,7 +67,7 @@ export default function HistoryPage() {
             </section>
 
             {/* Timeline Section */}
-            <section className={styles.contentSection}>
+            <section className={styles.timelineSection}>
                 <div className="container">
                     <div className={styles.sectionHeader}>
                         <h2 className={styles.sectionTitle}>Our Journey</h2>
@@ -77,12 +77,20 @@ export default function HistoryPage() {
                         </p>
                     </div>
                     <div className={styles.timeline}>
-                        {timeline.map((item) => (
-                            <div key={item.year} className={styles.timelineItem}>
-                                <div className={styles.timelineDot}></div>
-                                <span className={styles.timelineYear}>{item.year}</span>
-                                <h3 className={styles.timelineTitle}>{item.title}</h3>
-                                <p className={styles.timelineDescription}>{item.description}</p>
+                        <div className={styles.timelineLine}></div>
+                        {timeline.map((item, index) => (
+                            <div
+                                key={item.year}
+                                className={`${styles.timelineItem} ${index % 2 === 0 ? styles.timelineItemLeft : styles.timelineItemRight}`}
+                            >
+                                <div className={styles.timelineCard}>
+                                    <span className={styles.timelineYear}>{item.year}</span>
+                                    <h3 className={styles.timelineTitle}>{item.title}</h3>
+                                    <p className={styles.timelineDescription}>{item.description}</p>
+                                </div>
+                                <div className={styles.timelineConnector}>
+                                    <div className={styles.timelineDot}></div>
+                                </div>
                             </div>
                         ))}
                     </div>

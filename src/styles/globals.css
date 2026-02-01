@@ -205,10 +205,12 @@ h1 {
 h2 {
   font-size: var(--text-5xl);
   line-height: 1.1;
+  text-transform: uppercase;
 }
 
 h3 {
   font-size: var(--text-4xl);
+  text-transform: uppercase;
 }
 
 h4 {
@@ -255,6 +257,15 @@ a:hover {
 strong,
 b {
   font-weight: var(--font-weight-semibold);
+}
+
+blockquote {
+  border-left: 10px solid var(--color-primary);
+  padding-left: var(--space-6);
+  margin: var(--space-8) 0;
+  font-size: var(--text-xl);
+  font-style: italic;
+  color: var(--color-neutral-700);
 }
 
 /* ==========================================================================

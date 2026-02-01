@@ -40,13 +40,13 @@ export default async function AdminDashboardPage() {
                     <i className="fa-sharp-duotone fa-solid fa-plus"></i>
                     <span>New Article</span>
                 </Link>
-                <Link href="/admin/jobs/new" className={styles.quickActionCard}>
-                    <i className="fa-sharp-duotone fa-solid fa-plus"></i>
-                    <span>New Job Opening</span>
-                </Link>
                 <Link href="/admin/testimonials/new" className={styles.quickActionCard}>
                     <i className="fa-sharp-duotone fa-solid fa-plus"></i>
                     <span>New Testimonial</span>
+                </Link>
+                <Link href="/admin/jobs/new" className={styles.quickActionCard}>
+                    <i className="fa-sharp-duotone fa-solid fa-plus"></i>
+                    <span>New Job Opening</span>
                 </Link>
                 <Link href="/" target="_blank" className={styles.quickActionCard}>
                     <i className="fa-sharp-duotone fa-solid fa-arrow-up-right-from-square"></i>
